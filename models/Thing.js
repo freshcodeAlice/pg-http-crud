@@ -23,7 +23,7 @@ class Thing {
     const { rows } = await this._client.query(`
     INSERT INTO ${this._tableName}
     (${insertSchemaStr}) VALUES 
-    (${insertValueStr});
+    (${insertValueStr})
     RETURNING *;
     `);
     return rows;
@@ -63,7 +63,7 @@ class Thing {
     const { rows } = await this._client.query(`
     SELECT * 
     FROM ${this._tableName}
-    WHERE "id" = ${pkValue}
+    WHERE "id" = ${pkValue};
     `);
     return rows;
   }
