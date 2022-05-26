@@ -5,5 +5,5 @@ CREATE TABLE things(
     updated_at timestamp NOT NULL DEFAULT current_timestamp
 );
 
-INSERT INTO thing (body) 
+INSERT INTO "things" ("body") 
 VALUES ();

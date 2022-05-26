@@ -1,6 +1,5 @@
 const { Client } = require('pg');
 const config = require('../configs/db.json');
-const Thing = require('./Thing');
 const fs = require('fs');
 const path = require('path');
 
@@ -12,11 +11,9 @@ const dbConfig = config[env];
 const client = new Client(dbConfig);
 
 client.connect();
-Thing._client = client;
 
 const db = {
-  client,
-  Thing
+  client
 };
 
 fs.readdirSync(__dirname)
@@ -24,6 +21,8 @@ fs.readdirSync(__dirname)
   .forEach(fileName => {
     const absPathToFile = path.resolve(__dirname, fileName);
     const Model = require(absPathToFile);
+    Model._client = client;
+    db[Model.name] = Model;
   });
 
 process.on('beforeExit', () => {
